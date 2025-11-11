@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy birthday form</title>
+    <style>
+        
+        .content{
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-top: 20vh;
+            font-family: Arial, sans-serif;
+        }
+        h1{
+            color: #e64b4b;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        h2{
+            color: #00c3ff;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        p{
+            color: rgb(71, 255, 160);
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button{
+            position: relative;
+            z-index: 10;
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0f2545;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+        :root{
+            --bg1: linear-gradient(180deg,#0b1b3a 0%, #0f2545 50%, #2b4a7a 100%);
+        }
+
+        html,body{
+            height:100%;
+            margin:0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--bg1);
+            overflow:hidden;
+            color:white;
+        }
+
+        /* Container chính */
+        .scene{
+            position:relative;
+            width:100%;
+            height:100vh;
+            overflow:hidden;
+        }
+
+        /* Bóng bay */
+        .balloon {
+            position: absolute;
+            bottom: -120px;
+            animation: floatUp var(--duration) linear forwards;
+            left: var(--x);
+        }
+
+        .balloon-inner {
+            width: var(--size);
+            height: calc(var(--size) * 1.2);
+            background: var(--color);
+            border-radius: 50% 50% 48% 48%;
+            box-shadow: inset -10px -12px rgba(0,0,0,0.12), 0 10px 18px rgba(0,0,0,0.18);
+            display:flex;
+            align-items:flex-end;
+            justify-content:center;
+            animation: wobble var(--wobble) ease-in-out infinite;
+            transform-origin: 50% 90%;
+        }
+
+        .balloon-inner::after {
+            content:"";
+            position:absolute;
+            left:18%;
+            top:12%;
+            width:18%;
+            height:28%;
+            border-radius:50%;
+            background: rgba(255,255,255,0.22);
+            transform: rotate(-20deg);
+            filter: blur(1px);
+        }
+
+        /* Dây bóng bay */
+        .string {
+            position:absolute;
+            bottom:-28px;
+            width:2px;
+            height:40px;
+            background: rgba(255,255,255,0.7);
+            left:50%;
+            transform:translateX(-50%);
+            border-radius:2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Keyframes - lên trên */
+        @keyframes floatUp{
+            0% { transform: translateY(0) scale(1); opacity:0 }
+            10% { opacity:1 }
+            100% { transform: translateY(-1200px); }
+        }
+
+        /* nhẹ lắc */
+        @keyframes wobble{
+            0% { transform: rotate(-3deg) }
+            50% { transform: rotate(4deg) }
+            100% { transform: rotate(-3deg) }
+        }
+
+        /* Tuyết */
+        .snow-layer{
+            position:absolute;
+            inset:0;
+            pointer-events:none;
+            overflow:hidden;
+        }
+
+        .flake{
+            position:absolute;
+            top:-10%;
+            width:var(--s);
+            height:var(--s);
+            opacity:var(--op,0.85);
+            transform: translateY(0) rotate(0deg);
+            animation: fall var(--fall-duration) linear infinite;
+            user-select:none;
+        }
+
+        .flake::before{
+            content: "❄";
+            font-size: calc(var(--s) * 1.4);
+            line-height: 1;
+            display:inline-block;
+        }
+
+        @keyframes fall{
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:0 }
+            5% { opacity: var(--op,0.85) }
+            100% { transform: translateY(120vh) translateX(var(--dx)) rotate(360deg); opacity:0.95 }
+        }
+
+        .center-msg{
+            position:absolute;
+            left:50%;
+            top:18%;
+            transform: translateX(-50%);
+            text-align:center;
+            z-index:5;
+        }
+        .center-msg h1{
+            margin:0;
+            font-size: clamp(28px, 5vw, 56px);
+            letter-spacing: 1px;
+            text-shadow: 0 6px 20px rgba(0,0,0,0.5);
+        }
+        .center-msg p{ margin-top:8px; opacity:0.85 }
+
+        @media (max-width:600px){
+            .center-msg{ top:10% }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Chúc Mừng Sinh Nhật Diệu nhoaaa❤️</h1>
+        <h2>🎊12/11🎉hép pi bợt đây🎉12/11🎊</h2>
+        <p>liu liu a đùa á a chưa đù trình để làm phần quét xác thực người dùng có dùng phần mềm thứ 3 đâu</p>
+        <p>web trường còn không check được, a còn lâu hahaha</p>
+        <p>anyway chúc e sinh nhật zui zẻ nha❤️❤️❤️</p>
+        <p>năm nay không có quà có gì cho a nợ nha a để dành hehe</p>
+        <img src="meme-tang-hoa-tulip.jpg" alt="tặng cho em" style="width: 200px; border-radius: 12px; margin-top: 15px;">
+    </div>
+    
+    <div id="scene" class="scene" style="position:fixed; top:0; left:0; pointer-events:none;z-index: 0;">
+        <div class="snow-layer" id="snow1" style="z-index:3"></div>
+        <div class="snow-layer" id="snow2" style="z-index:4"></div>
+    </div>
+    
+    <script>
+        const config = {
+        balloonCount: 12,
+        balloonColors: ['#FF6B6B','#FFB86B','#FFD56B','#6BCB77','#6BB8FF','#A36BFF','#FF6BCB'],
+        balloonSize: [60, 140],    
+        balloonDuration: [10, 20],  
+        snowCountLayer1: 30,
+        snowCountLayer2: 18,
+        snowSize: [6, 18],         
+        snowDuration: [8, 18],    
+        };
+
+        /* Utility */
+        function rand(min, max){ return Math.random() * (max - min) + min; }
+        function choose(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+        /* Tạo bong bóng */
+        function createBalloon(i){
+        const el = document.createElement('div');
+        el.className = 'balloon';
+
+        const inner = document.createElement('div');
+        inner.className = 'balloon-inner';
+        el.appendChild(inner);
+        
+
+        // random kích thước, màu, vị trí ngang, tốc độ
+        const size = Math.floor(rand(config.balloonSize[0], config.balloonSize[1])) + 'px';
+        const color = choose(config.balloonColors);
+        const duration = (rand(config.balloonDuration[0], config.balloonDuration[1])).toFixed(1) + 's';
+        const wobble = (rand(3.5,7.5)).toFixed(1) + 's';
+
+        el.style.setProperty('--size', size);
+        el.style.setProperty('--color', color);
+        el.style.setProperty('--duration', duration);
+        el.style.setProperty('--wobble', wobble);
+
+        // vị trí ngang khởi tạo (đặt bottom ngoài màn hình, left% random)
+        const left = Math.floor(rand(4, 94));
+        el.style.left = left + '%';
+
+        // tạo dây
+        const s = document.createElement('div');
+        s.className = 'string';
+        inner.appendChild(s);
+
+        // nhẹ biến đổi delay để không cùng lúc
+        el.style.animationDelay = (rand(0, 8)).toFixed(2) + 's';
+
+        // scale theo kích thước (để những quả lớn có dây dài hơn)
+        el.style.transform = `translateY(0) scale(${1})`;
+
+        // thêm vào scene
+        document.getElementById('scene').appendChild(el);
+
+        // remove sau animation hoàn tất (kể cả khi vô hạn, xử lý vòng lặp bằng setTimeout)
+        const durMs = parseFloat(duration) * 1000 + 12000; // thêm extra để đảm bảo rời khỏi view
+        setTimeout(() => {
+            if (el && el.parentNode) el.parentNode.removeChild(el);
+            // tạo lại 1 quả mới thay thế (để duy trì số lượng)
+            createBalloon(i);
+        }, durMs);
+        }
+
+        /* Tạo tuyết */
+        function createFlake(container, i, layerIndex){
+        const f = document.createElement('div');
+        f.className = 'flake';
+
+        const s = Math.floor(rand(config.snowSize[0], config.snowSize[1]));
+        const fall = rand(config.snowDuration[0], config.snowDuration[1]).toFixed(1) + 's';
+        const left = rand(0, 100).toFixed(2) + '%';
+        const dx = (rand(-30, 30)).toFixed(2) + 'vw';
+        const op = rand(0.4, 1).toFixed(2);
+
+        f.style.setProperty('--s', s + 'px');
+        f.style.setProperty('--fall-duration', fall);
+        f.style.left = left;
+        f.style.setProperty('--dx', dx);
+        f.style.setProperty('--op', op);
+
+        // mỗi layer có delay khác nhau để tạo depth
+        f.style.animationDelay = (rand(0, 6) + (layerIndex*1.8)).toFixed(2) + 's';
+
+        container.appendChild(f);
+
+        // không cần remove (infinite animation), nhưng để tiết kiệm DOM có thể recreate sau 60s
+        setTimeout(() => {
+            if (f && f.parentNode) {
+            container.removeChild(f);
+            createFlake(container, i, layerIndex);
+            }
+        }, (parseFloat(fall) * 1000) + 20000);
+        }
+
+        /* Khởi tạo scene */
+        function init(){
+        // bong bóng
+        for (let i=0;i<config.balloonCount;i++){
+            // tạo với chút trễ random
+            setTimeout(()=>createBalloon(i), Math.random()*1500);
+        }
+
+        // tuyết layer 1 (foreground nhỏ hơn số lượng, to hơn)
+        const snow1 = document.getElementById('snow1');
+        for (let i=0;i<config.snowCountLayer1;i++){
+            createFlake(snow1, i, 0);
+        }
+
+        // tuyết layer 2 (phía sau, chậm hơn, nhỏ hơn)
+        const snow2 = document.getElementById('snow2');
+        for (let i=0;i<config.snowCountLayer2;i++){
+            createFlake(snow2, i, 1);
+        }
+        }
+
+        /* Start */
+        document.addEventListener('DOMContentLoaded', init);
+
+        document.getElementById('scene').addEventListener('click', (e)=>{
+
+            if (e.target.closest('.center-msg')) return;
+            createBalloon('click-'+Date.now());
+        });
+    </script>
+</body>
+</html>
