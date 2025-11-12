@@ -194,6 +194,9 @@
     </div>
     
     <script>
+        if (window === window.top){
+            window.location.href = 'main.html';
+        }
         const config = {
         balloonCount: 12,
         balloonColors: ['#FF6B6B','#FFB86B','#FFD56B','#6BCB77','#6BB8FF','#A36BFF','#FF6BCB'],

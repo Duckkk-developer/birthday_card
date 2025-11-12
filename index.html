@@ -184,6 +184,9 @@
     </div>
     <button><a href="form.html">xem thêm</a></button>
     <script>
+        if (window === window.top){
+            window.location.href = 'main.html';
+        }
         const config = {
         balloonCount: 12,
         balloonColors: ['#FF6B6B','#FFB86B','#FFD56B','#6BCB77','#6BB8FF','#A36BFF','#FF6BCB'],
@@ -292,7 +295,6 @@
             createFlake(snow1, i, 0);
         }
 
-        // tuyết layer 2 (phía sau, chậm hơn, nhỏ hơn)
         const snow2 = document.getElementById('snow2');
         for (let i=0;i<config.snowCountLayer2;i++){
             createFlake(snow2, i, 1);
